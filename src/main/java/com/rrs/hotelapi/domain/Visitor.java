@@ -27,8 +27,6 @@ public class Visitor {
     @Transient
     private String roomNumber;
 
-    // Getter and setter methods
-
     public String getRoomNumber() {
         if (room != null) {
             return room.getNumber();

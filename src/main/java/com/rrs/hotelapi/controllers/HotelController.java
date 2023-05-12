@@ -4,23 +4,18 @@ import com.rrs.hotelapi.domain.Room;
 import com.rrs.hotelapi.domain.Visitor;
 import com.rrs.hotelapi.repository.RoomRepository;
 import com.rrs.hotelapi.repository.VisitorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/hotel")
 class HotelController {
     private final RoomRepository roomRepository;
     private final VisitorRepository visitorRepository;
-
-    @Autowired
-    public HotelController(RoomRepository roomRepository, VisitorRepository visitorRepository) {
-        this.roomRepository = roomRepository;
-        this.visitorRepository = visitorRepository;
-    }
 
 
     // Привітання. Головна
