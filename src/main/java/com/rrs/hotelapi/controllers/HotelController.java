@@ -85,7 +85,7 @@ class HotelController {
     }
 
 
-    // Видалити відвідувача з кімнати
+    // Видалити відвідувача
     @DeleteMapping("/rooms/{roomId}/visitors/{visitorId}")
     public Room removeVisitorFromRoom(@PathVariable Long roomId, @PathVariable Long visitorId) {
         Room room = roomRepository.findById(roomId).orElse(null);
@@ -99,26 +99,6 @@ class HotelController {
             }
         }
         return null;
-    }
-
-    // Перемістити відвідувача з кімнати в іншу ДОРОБИТИ!!!!!!
-    @PostMapping("/rooms/{roomId}/visitors/{visitorId}/move")
-    public Room moveVisitorToRoom(@PathVariable Long roomId, @PathVariable Long visitorId) {
-        Room room = roomRepository.findById(roomId).orElse(null);
-        Visitor visitor = visitorRepository.findById(visitorId).orElse(null);
-        if (room != null && visitor != null) {
-            room.getVisitors().remove(visitor);
-            visitor.setRoom(null);
-            visitorRepository.save(visitor);
-            return roomRepository.save(room);
-        }
-        return null;
-    }
-
-    // Додати відвідувача ВИДАЛИТИ АБО ДОРОБИТИ!!!!!!
-    @PostMapping("/visitors")
-    public Visitor saveVisitor(@RequestBody Visitor visitor) {
-        return visitorRepository.save(visitor);
     }
 
     // Перегляд відвідувачів
