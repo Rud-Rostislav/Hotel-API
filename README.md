@@ -115,4 +115,4 @@ http://localhost:8080/hotel
    Встановіть метод HTTP на PUT
    Встановіть URL:
    http://localhost:8080/hotel/rooms/1/visitors/{visitorId}/move/2
-   1 - кімната з якої треба пересилит, visitorId - id відвідувача, 2 - кімната, куди треба переселити
+   1 - кімната з якої треба пересилити, visitorId - id відвідувача, 2 - кімната, куди треба переселити
