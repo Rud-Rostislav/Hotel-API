@@ -6,7 +6,6 @@ import com.rrs.hotelapi.repository.RoomRepository;
 import com.rrs.hotelapi.repository.VisitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -25,7 +24,7 @@ class HotelController {
     // Привітання. Головна
     @GetMapping("")
     public String index() {
-        return "НАШО ТИ СЮДИ ЗАЙШОВ?";
+        return "Welcome to Hotel API";
     }
 
     // Створення кімнати
@@ -104,16 +103,24 @@ class HotelController {
     @GetMapping("/visitors")
     public List<Visitor> searchVisitors(@RequestParam(required = false) String lastName,
                                         @RequestParam(required = false) String passportNumber) {
+        List<Visitor> visitors;
         if (lastName != null && passportNumber != null) {
-            return visitorRepository.findByLastNameAndPassportNumber(lastName, passportNumber);
+            visitors = visitorRepository.findByLastNameAndPassportNumber(lastName, passportNumber);
         } else if (lastName != null) {
-            return visitorRepository.findByLastName(lastName);
+            visitors = visitorRepository.findByLastName(lastName);
         } else if (passportNumber != null) {
-            return Collections.singletonList(visitorRepository.findByPassportNumber(passportNumber));
+            visitors = Collections.singletonList(visitorRepository.findByPassportNumber(passportNumber));
         } else {
-            return visitorRepository.findAll();
+            visitors = visitorRepository.findAll();
         }
+
+        for (Visitor visitor : visitors) {
+            visitor.setRoomNumber(visitor.getRoomNumber());
+        }
+
+        return visitors;
     }
+
 
     // Оновити дані відвідувача
     @PutMapping("/visitors/{visitorId}")
