@@ -6,6 +6,7 @@ import com.rrs.hotelapi.repository.RoomRepository;
 import com.rrs.hotelapi.repository.VisitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -21,11 +22,13 @@ class HotelController {
         this.visitorRepository = visitorRepository;
     }
 
+
     // Привітання. Головна
     @GetMapping("")
     public String index() {
         return "Welcome to Hotel API";
     }
+
 
     // Створення кімнати
     @PostMapping("/rooms")
@@ -33,17 +36,20 @@ class HotelController {
         return roomRepository.save(room);
     }
 
+
     // Перегляд кімнат
     @GetMapping("/rooms")
     public List<Room> getRooms() {
         return roomRepository.findAllWithVisitors();
     }
 
+
     // Перегляд кімнати
     @GetMapping("/rooms/{number}")
     public Room getRoom(@PathVariable String number) {
         return roomRepository.findByNumber(number);
     }
+
 
     // Оновити дані кімнати
     @PutMapping("/rooms/{roomId}")
@@ -58,11 +64,13 @@ class HotelController {
         return null;
     }
 
+
     // Видалити кімнату
     @DeleteMapping("/rooms/{roomId}")
     public void deleteRoom(@PathVariable Long roomId) {
         roomRepository.deleteById(roomId);
     }
+
 
     // Додати відвідувача до кімнати
     @PostMapping("/rooms/{roomId}/visitors")
@@ -98,6 +106,7 @@ class HotelController {
         }
         return null;
     }
+
 
     // Перегляд відвідувачів
     @GetMapping("/visitors")
@@ -135,6 +144,7 @@ class HotelController {
         return null;
     }
 
+
     // Переселити відвідувача з однієї кімнати до іншої
     @PutMapping("/rooms/{oldRoomId}/visitors/{visitorId}/move/{newRoomId}")
     public Room moveVisitorToRoom(@PathVariable Long oldRoomId, @PathVariable Long visitorId, @PathVariable Long newRoomId) {
@@ -168,4 +178,5 @@ class HotelController {
         }
         return null;
     }
+
 }

@@ -9,6 +9,7 @@ import java.util.List;
 // Додає поля із Room до БД
 public interface RoomRepository extends JpaRepository<Room, Long> {
     Room findByNumber(String number);
+
     @Query("SELECT DISTINCT r FROM Room r LEFT JOIN FETCH r.visitors")
     List<Room> findAllWithVisitors();
 }
