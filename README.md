@@ -110,3 +110,9 @@ http://localhost:8080/hotel
    Встановіть URL:
    http://localhost:8080/hotel/rooms/{roomId}/visitors/{visitorId}
    Замініть {roomId}на ідентифікатор кімнати, з якої потрібно видалити і {visitorId} номер відвідувача.
+
+5. Перемістити відвідувача до іншої кімнати ✅
+   Встановіть метод HTTP на PUT
+   Встановіть URL:
+   http://localhost:8080/hotel/rooms/1/visitors/{visitorId}/move/2
+   1 - кімната з якої треба пересилит, visitorId - id відвідувача, 2 - кімната, куди треба переселити

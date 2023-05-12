@@ -71,7 +71,6 @@ class HotelController {
         Room room = roomRepository.findById(roomId).orElse(null);
         if (room != null) {
             if (room.getVisitors().size() >= room.getCapacity()) {
-                // Кімната вже заповнена максимальною кількістю відвідувачів
                 return null;
             }
 
@@ -125,6 +124,40 @@ class HotelController {
             visitor.setLastName(updatedVisitor.getLastName());
             visitor.setPassportNumber(updatedVisitor.getPassportNumber());
             return visitorRepository.save(visitor);
+        }
+        return null;
+    }
+
+    // Переселити відвідувача з однієї кімнати до іншої
+    @PutMapping("/rooms/{oldRoomId}/visitors/{visitorId}/move/{newRoomId}")
+    public Room moveVisitorToRoom(@PathVariable Long oldRoomId, @PathVariable Long visitorId, @PathVariable Long newRoomId) {
+        Room oldRoom = roomRepository.findById(oldRoomId).orElse(null);
+        Room newRoom = roomRepository.findById(newRoomId).orElse(null);
+        if (oldRoom != null && newRoom != null) {
+            Visitor visitor = visitorRepository.findById(visitorId).orElse(null);
+
+            if (visitor != null && oldRoom.getVisitors().contains(visitor)) {
+                if (newRoom.getVisitors().size() < newRoom.getCapacity()) {
+                    // Remove visitor from old room
+                    oldRoom.getVisitors().remove(visitor);
+                    visitor.setRoom(null);
+                    visitorRepository.save(visitor);
+
+                    // Add visitor to new room
+                    newRoom.getVisitors().add(visitor);
+                    visitor.setRoom(newRoom);
+                    visitorRepository.save(visitor);
+
+                    // Update occupied status of rooms
+                    oldRoom.setOccupied(!oldRoom.getVisitors().isEmpty());
+                    roomRepository.save(oldRoom);
+
+                    newRoom.setOccupied(true);
+                    roomRepository.save(newRoom);
+
+                    return newRoom;
+                }
+            }
         }
         return null;
     }
