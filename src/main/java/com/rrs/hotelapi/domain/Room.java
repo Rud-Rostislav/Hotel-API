@@ -1,6 +1,5 @@
 package com.rrs.hotelapi.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+// Поля для БД про кімнати
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,6 +20,6 @@ public class Room {
     private int capacity;
     private boolean occupied;
 
-    @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "room", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<Visitor> visitors;
 }

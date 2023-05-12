@@ -1,11 +1,13 @@
 package com.rrs.hotelapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-// Поля для додавання у БД
+// Поля для БД про відвідувачів
 @Entity
 @Data
 @NoArgsConstructor
@@ -18,6 +20,7 @@ public class Visitor {
     private String lastName;
     private String passportNumber;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     private Room room;
 }
