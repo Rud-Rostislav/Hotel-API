@@ -9,7 +9,7 @@ http://localhost:8080/hotel
 
 --------------------
 
-1. Запит на додавання кімнати:
+1. Додавання кімнати:
    Встановіть метод HTTP на POST.
    Встановіть URL:
    http://localhost:8080/hotel/rooms
@@ -22,18 +22,18 @@ http://localhost:8080/hotel
 "occupied": false
 }
 
-2. Запит на отримання всіх кімнат:
+2. Отримання всіх кімнат:
    Встановіть для методу HTTP значення GET.
    Встановіть URL:
    http://localhost:8080/hotel/rooms
 
-3. Запит на отримання однієї кімнати:
+3. Отримання однієї кімнати:
    Встановіть для методу HTTP значення GET.
    Встановіть URL
    http://localhost:8080/hotel/rooms/{id}
    Де {id} - порядковий номер кімнати
 
-4. Запит на оновлення кімнати:
+4. Оновлення кімнати:
    Встановіть метод HTTP на PUT.
    Встановіть URL:
    http://localhost:8080/hotel/rooms/{roomId}
@@ -47,13 +47,13 @@ http://localhost:8080/hotel
 "occupied": false
 }
 
-5. Запит на видалення кімнати:
+5. Видалення кімнати:
    Встановіть метод HTTP на DELETE.
    Встановіть URL:
    http://localhost:8080/hotel/rooms/{roomId}
    Замініть {roomId}на ідентифікатор кімнати, яку потрібно видалити.
 
-6. Запит на додавання відвідувача в кімнату:
+6. Додавання відвідувача в кімнату:
    Встановіть метод HTTP на POST.
    Встановіть URL:
    http://localhost:8080/hotel/rooms/{roomId}/visitors
@@ -80,7 +80,7 @@ http://localhost:8080/hotel
    http://localhost:8080/hotel/visitors
 
 
-2. Створіть новий запит на оновлення інформації відвідувача:
+2. Оновлення інформації відвідувача:
    Встановіть метод HTTP на PUT.
    Встановіть URL:
    http://localhost:8080/hotel/visitors/{visitorId}
@@ -96,7 +96,7 @@ http://localhost:8080/hotel
 "passportNumber": "AB12345"
 }
 
-3. Створіть новий запит для пошуку відвідувачів:
+3. Пошук відвідувачів:
    Встановіть для методу HTTP значення GET.
    Для пошуку за прізвищем додайте lastName параметр запиту. Наприклад:
    http://localhost:8080/hotel/visitors?lastName=Doe
