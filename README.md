@@ -1,5 +1,8 @@
 Посібник із використання Postman із API готелю:
 
+Для керування через Swagger запустіть додаток та перейдіть по URL:
+http://localhost:8080/swagger-ui/index.html
+
 Привітання:
 http://localhost:8080/hotel
 
