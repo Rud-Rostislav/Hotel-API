@@ -5,11 +5,14 @@ import com.rrs.hotelapi.domain.Visitor;
 import com.rrs.hotelapi.repository.RoomRepository;
 import com.rrs.hotelapi.repository.VisitorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
+// Сервіс для розробки логіки застосунку
 @Service
 @RequiredArgsConstructor
 public class HotelService {
@@ -55,6 +58,8 @@ public class HotelService {
             }
 
             visitor.setRoom(room);
+            visitor.setJoinDate(visitor.getJoinDate());
+            visitor.setLeaveDate(visitor.getLeaveDate());
             visitorRepository.save(visitor);
             room.getVisitors().add(visitor);
             room.setOccupied(true);
@@ -135,6 +140,25 @@ public class HotelService {
         }
         return null;
     }
+
+    @Scheduled(cron = "0 0/30 * * * *") // Runs every 30 minutes
+    public void checkOutVisitors() {
+        List<Visitor> visitors = visitorRepository.findAll();
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        for (Visitor visitor : visitors) {
+            LocalDateTime leaveDate = visitor.getLeaveDate();
+            if (leaveDate != null && currentDate.isAfter(leaveDate)) {
+                Room room = visitor.getRoom();
+                if (room != null) {
+                    room.getVisitors().remove(visitor);
+                    visitor.setRoom(null);
+                    visitorRepository.save(visitor);
+                    room.setOccupied(!room.getVisitors().isEmpty());
+                    roomRepository.save(room);
+                }
+            }
+        }
+    }
+
 }
-
-

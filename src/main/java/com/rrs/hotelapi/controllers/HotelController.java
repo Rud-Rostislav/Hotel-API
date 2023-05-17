@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Контролює виконання дій при переході по URL
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/hotel")

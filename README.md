@@ -64,8 +64,11 @@ http://localhost:8080/hotel
 {
 "firstName": "John",
 "lastName": "Doe",
-"passportNumber": "AB123456"
+"passportNumber": "AB123456",
+"joinDate": "2023-05-17T10:00:00",
+"leaveDate": "2023-05-20T12:00:00"
 }
+
 
 
 ---------------------

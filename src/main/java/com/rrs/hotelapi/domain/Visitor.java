@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 // Поля для БД про відвідувачів
 @Entity
 @Data
@@ -18,6 +20,8 @@ public class Visitor {
     private String firstName;
     private String lastName;
     private String passportNumber;
+    private LocalDateTime joinDate;
+    private LocalDateTime leaveDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
