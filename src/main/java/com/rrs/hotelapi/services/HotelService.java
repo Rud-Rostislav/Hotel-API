@@ -58,6 +58,7 @@ public class HotelService {
             }
 
             visitor.setRoom(room);
+            visitor.setRoomNumber(room.getNumber());
             visitor.setJoinDate(visitor.getJoinDate());
             visitor.setLeaveDate(visitor.getLeaveDate());
             visitorRepository.save(visitor);
@@ -95,8 +96,11 @@ public class HotelService {
         }
 
         for (Visitor visitor : visitors) {
-            visitor.setRoomNumber(visitor.getRoomNumber());
+            if (visitor.getRoom() != null) {
+                visitor.setRoomNumber(visitor.getRoom().getNumber());
+            }
         }
+
 
         return visitors;
     }
@@ -133,6 +137,8 @@ public class HotelService {
 
                     newRoom.setOccupied(true);
                     roomRepository.save(newRoom);
+                    visitor.setRoomNumber(newRoom.getNumber());
+
 
                     return newRoom;
                 }

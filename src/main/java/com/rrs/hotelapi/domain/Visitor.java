@@ -35,6 +35,7 @@ public class Visitor {
         if (room != null) {
             return room.getNumber();
         }
-        return null;
+        return roomNumber;
     }
+
 }
