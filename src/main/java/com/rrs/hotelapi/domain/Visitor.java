@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Data
@@ -27,9 +26,6 @@ public class Visitor {
     @JoinColumn(name = "room_id")
     @JsonIgnore
     private Room room;
-
-    @OneToMany(mappedBy = "visitor", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    private List<Booking> bookings;
 
     @Transient
     private String roomNumber;
