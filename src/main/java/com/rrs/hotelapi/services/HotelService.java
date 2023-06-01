@@ -1,7 +1,9 @@
 package com.rrs.hotelapi.services;
 
+import com.rrs.hotelapi.domain.Booking;
 import com.rrs.hotelapi.domain.Room;
 import com.rrs.hotelapi.domain.Visitor;
+import com.rrs.hotelapi.repository.BookingRepository;
 import com.rrs.hotelapi.repository.RoomRepository;
 import com.rrs.hotelapi.repository.VisitorRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 public class HotelService {
     private final RoomRepository roomRepository;
     private final VisitorRepository visitorRepository;
+    private final BookingRepository bookingRepository;
 
     public String index() {
         return "Welcome to Hotel API";
@@ -63,11 +66,29 @@ public class HotelService {
             visitorRepository.save(visitor);
             room.getVisitors().add(visitor);
             room.setOccupied(true);
+            roomRepository.save(room);
 
-            return roomRepository.save(room);
+            Booking booking = new Booking();
+//            booking.setRoom(room);
+            booking.setVisitor(visitor);
+            booking.setRoomNumber(room.getNumber());
+            booking.setCheckIn(visitor.getJoinDate().toString());
+            booking.setCheckOut(visitor.getLeaveDate().toString());
+            bookingRepository.save(booking);
+
+            return room;
         }
         return null;
     }
+
+    public List<Booking> getBookingsByVisitorId(Long visitorId) {
+        Visitor visitor = visitorRepository.findById(visitorId).orElse(null);
+        if (visitor != null) {
+            return bookingRepository.findByVisitor(visitor);
+        }
+        return Collections.emptyList();
+    }
+
 
     public Room removeVisitorFromRoom(Long roomId, Long visitorId) {
         Room room = roomRepository.findById(roomId).orElse(null);

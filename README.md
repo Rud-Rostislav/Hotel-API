@@ -122,3 +122,7 @@ http://localhost:8080/hotel
    Встановіть URL:
    http://localhost:8080/hotel/rooms/1/visitors/{visitorId}/move/2
    1 - кімната з якої треба пересилити, visitorId - id відвідувача, 2 - кімната, куди треба переселити
+6. Отримати історію бронювань
+   Встановіть метод HTTP на GET
+   Встановіть URL:
+   http://localhost:8080/hotel/visitors/{visitorId}/bookings

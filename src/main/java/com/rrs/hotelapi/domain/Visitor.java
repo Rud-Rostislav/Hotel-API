@@ -27,6 +27,7 @@ public class Visitor {
     @JsonIgnore
     private Room room;
 
+
     @Transient
     private String roomNumber;
 

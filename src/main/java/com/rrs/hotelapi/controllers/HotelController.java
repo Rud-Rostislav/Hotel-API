@@ -1,5 +1,6 @@
 package com.rrs.hotelapi.controllers;
 
+import com.rrs.hotelapi.domain.Booking;
 import com.rrs.hotelapi.domain.Room;
 import com.rrs.hotelapi.domain.Visitor;
 import com.rrs.hotelapi.services.HotelService;
@@ -47,6 +48,11 @@ class HotelController {
     @PostMapping("/rooms/{roomId}/visitors")
     public Room addVisitorToRoom(@PathVariable Long roomId, @RequestBody Visitor visitor) {
         return hotelService.addVisitorToRoom(roomId, visitor);
+    }
+
+    @GetMapping("/visitors/{visitorId}/bookings")
+    public List<Booking> getBookingsByVisitorId(@PathVariable Long visitorId) {
+        return hotelService.getBookingsByVisitorId(visitorId);
     }
 
     @DeleteMapping("/rooms/{roomId}/visitors/{visitorId}")
