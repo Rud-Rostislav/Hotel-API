@@ -77,6 +77,9 @@ public class HotelService {
                 visitor.setRoom(null);
                 visitorRepository.delete(visitor);
                 room.getVisitors().remove(visitor);
+                if (room.getVisitors().isEmpty()) {
+                    room.setOccupied(false);
+                }
                 return roomRepository.save(room);
             }
         }
