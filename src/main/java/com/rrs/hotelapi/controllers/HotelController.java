@@ -72,4 +72,9 @@ class HotelController {
         return hotelService.moveVisitorToRoom(oldRoomId, visitorId, newRoomId);
     }
 
+    @GetMapping("/rooms/booking/{visitorId}")
+    public Visitor getBooking(@PathVariable Long visitorId) {
+        return hotelService.getBooking(visitorId).getVisitor();
+    }
+
 }
