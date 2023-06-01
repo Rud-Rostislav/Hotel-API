@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
-// Сервіс для розробки логіки застосунку
 @Service
 @RequiredArgsConstructor
 public class HotelService {

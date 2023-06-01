@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-// Додає поля із Visitor до БД
 public interface VisitorRepository extends JpaRepository<Visitor, Long> {
     Visitor findByPassportNumber(String passportNumber);
 

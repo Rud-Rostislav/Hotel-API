@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-// Поля для БД про відвідувачів
 @Entity
 @Data
 @NoArgsConstructor

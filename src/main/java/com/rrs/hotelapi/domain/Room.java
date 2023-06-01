@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-// Поля для БД про кімнати
 @Entity
 @Data
 @NoArgsConstructor

@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-// Додає поля із Room до БД
 public interface RoomRepository extends JpaRepository<Room, Long> {
     Room findByNumber(String number);
 
