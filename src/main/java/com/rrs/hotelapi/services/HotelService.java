@@ -1,7 +1,9 @@
 package com.rrs.hotelapi.services;
 
+import com.rrs.hotelapi.domain.Booking;
 import com.rrs.hotelapi.domain.Room;
 import com.rrs.hotelapi.domain.Visitor;
+import com.rrs.hotelapi.repository.BookingRepository;
 import com.rrs.hotelapi.repository.RoomRepository;
 import com.rrs.hotelapi.repository.VisitorRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.List;
 public class HotelService {
     private final RoomRepository roomRepository;
     private final VisitorRepository visitorRepository;
+    private final BookingRepository bookingRepository;
 
     public String index() {
         return "Welcome to Hotel API";
@@ -64,6 +67,9 @@ public class HotelService {
             visitorRepository.save(visitor);
             room.getVisitors().add(visitor);
             room.setOccupied(true);
+
+            Booking booking = new Booking(roomId, visitor,  visitor.getJoinDate(), visitor.getLeaveDate());
+            bookingRepository.save(booking);
             return roomRepository.save(room);
         }
         return null;
@@ -148,6 +154,10 @@ public class HotelService {
             }
         }
         return null;
+    }
+
+    public Booking getBooking(Long bookingId) {
+        return bookingRepository.findById(bookingId).orElse(null);
     }
 
     @Scheduled(cron = "0 0/30 * * * *") // Runs every 30 minutes
