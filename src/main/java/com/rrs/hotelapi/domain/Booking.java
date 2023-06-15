@@ -14,11 +14,6 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "room_id")
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//    private Room room;
-
     @ManyToOne
     @JoinColumn(name = "visitor_id")
     private Visitor visitor;
