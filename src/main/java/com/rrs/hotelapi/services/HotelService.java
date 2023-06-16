@@ -69,7 +69,6 @@ public class HotelService {
             roomRepository.save(room);
 
             Booking booking = new Booking();
-//            booking.setRoom(room);
             booking.setVisitor(visitor);
             booking.setRoomNumber(room.getNumber());
             booking.setCheckIn(visitor.getJoinDate().toString());
@@ -171,7 +170,7 @@ public class HotelService {
         return null;
     }
 
-    @Scheduled(cron = "0 0/30 * * * *") // Runs every 30 minutes
+    @Scheduled(cron = "0 0/30 * * * *")
     public void checkOutVisitors() {
         List<Visitor> visitors = visitorRepository.findAll();
         LocalDateTime currentDate = LocalDateTime.now();
